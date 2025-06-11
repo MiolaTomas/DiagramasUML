@@ -1,0 +1,26 @@
+✅ 1. ¿Quién valida qué?
+Validaciones lógicas como:
+"¿Las contraseñas coinciden?"
+"¿Cumplen con los requisitos mínimos?"
+
+👉 Las hace el GestorDeUsuarios, porque son reglas de negocio.
+
+Validaciones que requieren datos persistentes como:
+"¿El nombre de usuario ya existe?"
+"¿El correo ya fue usado?"
+
+👉 Se consultan en la BaseDeDatosUsuarios, ya que ahí está la información.
+💡 Entonces, el gestor es quien coordina todo: valida lo que puede por sí mismo y le consulta a la base para lo que no puede saber solo.
+
+
+✅¿Dónde poner el alt?
+El alt se pone después de hacer todas las validaciones, para representar el resultado final, que puede ser:
+Usuario duplicado
+Contraseñas incorrectas
+Todo válido
+
+
+✅ Cómo pensar el orden correcto:
+El usuario llena el formulario y se envía al sistema.
+El sistema hace todas las validaciones.
+Luego, se entra al bloque alt, que representa el resultado de esas validaciones (una única decisión con varios caminos posibles).

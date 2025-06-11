@@ -1,0 +1,33 @@
+@startuml Registro de Nuevo Usuario
+
+actor Usuario
+participant "InterfazRegistro" as IR
+participant "GestorDeUsuarios" as GU
+participant "BaseDeDatosUsuarios" as DB
+
+Usuario -> IR: accederFormulario()
+IR --> Usuario: mostrarFormulario()
+
+Usuario -> IR: ingresarDatos()
+IR --> GU: datosRegistro
+
+GU -> GU: validarContraseñas()
+GU -> DB: verificarNombreUsuario()
+DB --> GU: resultadoUnicidad
+
+alt Usuario duplicado
+    GU --> IR: errorNombreDuplicado
+    IR -> Usuario: mostrarError("Nombre ya en uso")
+
+else Contraseñas incorrectas
+    GU --> IR: errorContraseñas
+    IR -> Usuario: mostrarError("Contraseñas no coinciden")
+
+else Datos válidos
+    GU -> DB: guardarUsuario()
+    DB --> GU: confirmación
+    GU --> IR: registroExitoso
+    IR -> Usuario: mostrarMensajeExito()
+end
+
+@enduml
