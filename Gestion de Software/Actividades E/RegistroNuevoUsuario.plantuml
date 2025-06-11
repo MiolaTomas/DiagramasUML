@@ -1,5 +1,5 @@
 @startuml Registro de Nuevo Usuario
-
+hide footbox
 actor Usuario
 participant "InterfazRegistro" as IR
 participant "GestorDeUsuarios" as GU
@@ -29,5 +29,4 @@ else Datos válidos
     GU --> IR: registroExitoso
     IR -> Usuario: mostrarMensajeExito()
 end
-
 @enduml
