@@ -42,7 +42,7 @@ class LineaProducto {
 ' ==== Relaciones entre Clases Principales ====
 Producto "*" --o "1" Categoria
 OrdenDeCompra "1" *--> "*" LineaProducto
-LineaProducto "*" *--> "1" Producto
+LineaProducto "*" --> "1" Producto
 Departamento "1" o-- "*" OrdenDeCompra
 Proveedor "1" o--> "*" OrdenDeCompra
 
@@ -80,9 +80,9 @@ Reporte <|-- ReporteGastosPorDepartamento
 Reporte <|-- ReporteOrdenesPendientes
 
 ' ==== Relaciones de Reportes con el Dominio ====
-Proveedor "1" o-- "1" ReportePorProveedor
-Categoria "1" o-- "1" ReportePorCategoriaProducto
+ReportePorProveedor "1" --> "1" Proveedor : generaPara
+ReportePorCategoriaProducto "1" --> "1" Categoria : generaPara
 ReporteGastosPorDepartamento ..> Departamento : usa
-ReporteOrdenesPendientes ..> OrdenDeCompra : consulta
+ReporteOrdenesPendientes ..> OrdenDeCompra : usa
 
 @enduml
