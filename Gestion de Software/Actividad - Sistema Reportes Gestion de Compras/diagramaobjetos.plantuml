@@ -1,0 +1,83 @@
+@startuml Diagrama de Objetos
+
+' ==== Objetos del escenario: Reporte de Compras por Proveedor ====
+
+object "Reporte1: ReportePorProveedor" as reporte {
+  idReporte = 301
+  fechaReporte = "2025-06-10"
+  fechaInicio = "2025-05-01"
+  fechaFin = "2025-05-31"
+}
+
+object "Proveedor: Proveedor" as proveedor {
+  idProveedor = 12
+  nombreProveedor = "Suministros Globales"
+}
+
+object "Usuario: Usuario" as usuario {
+  idUsuario = 5
+  nombre = "María López"
+  rol = "Analista de Compras"
+}
+
+object "OrdenDeCompra1: OrdenDeCompra" as orden1 {
+  idOrden = 542
+  fecha = "2025-05-05"
+  montoTotal = 1500.00
+  estadoOrden = "Recibida"
+}
+
+object "OrdenDeCompra2: OrdenDeCompra" as orden2 {
+  idOrden = 547
+  fecha = "2025-05-20"
+  montoTotal = 2450.00
+  estadoOrden = "Parcialmente Recibida"
+}
+
+object "Producto1: Producto" as producto1 {
+  idProducto = 1001
+  nombre = "Tóner HP"
+}
+
+object "Producto2: Producto" as producto2 {
+  idProducto = 1002
+  nombre = "Sillas ergonómicas"
+}
+
+object "Linea1: LineaProducto" as linea1 {
+  idLinea = 1
+  fechaCreacion = "2025-05-05"
+  estado = "Recibida"
+  cantidad = 2
+}
+
+object "Linea2: LineaProducto" as linea2 {
+  idLinea = 2
+  fechaCreacion = "2025-05-20"
+  estado = "Pendiente"
+  cantidad = 4
+}
+
+object "Linea3: LineaProducto" as linea3 {
+  idLinea = 3
+  fechaCreacion = "2025-05-20"
+  estado = "Recibida"
+  cantidad = 1
+}
+
+' ==== Relaciones entre objetos ====
+
+reporte --> proveedor : generado para
+reporte --> usuario : generado por
+reporte --> orden1 : incluye
+reporte --> orden2 : incluye
+
+orden1 --> linea1
+orden2 --> linea2
+orden2 --> linea3
+
+linea1 --> producto1
+linea2 --> producto2
+linea3 --> producto1
+
+@enduml

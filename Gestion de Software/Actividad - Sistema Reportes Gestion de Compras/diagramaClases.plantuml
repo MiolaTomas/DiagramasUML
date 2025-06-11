@@ -7,8 +7,15 @@ skinparam classBackgroundColor<<Reporte>> #FDEBD0
 skinparam classBorderColor<<Reporte>> #D35400
 
 ' ==== Clases Principales del Dominio ====
+class Usuario {
+    idUsuario: int
+    nombre: string
+    rol: string
+}
+
 class Producto {
     idProducto: int
+    nombre: string
 }
 
 class Categoria {
@@ -27,8 +34,10 @@ class Proveedor {
 }
 
 class OrdenDeCompra {
-    idProducto: int
+    idOrden: int
     estadoOrden: string
+    fecha: date
+    montoTotal(): int
 }
 
 class LineaProducto {
@@ -40,6 +49,7 @@ class LineaProducto {
 }
 
 ' ==== Relaciones entre Clases Principales ====
+Usuario "1" --> "*" Reporte : genera
 Producto "*" --o "1" Categoria
 OrdenDeCompra "1" *--> "*" LineaProducto
 LineaProducto "*" --> "1" Producto
@@ -55,6 +65,8 @@ abstract class Reporte <<Reporte>> {
 
 class ReportePorProveedor <<Reporte>> {
     idProveedor: int
+    fechaInicio: date
+    fechaFin: date
     generarReporte(): void
 }
 
