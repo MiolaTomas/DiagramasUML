@@ -1,0 +1,55 @@
+@startuml Gestion Ordenes de Compra
+left to right direction
+
+class Producto{
+    idProducto: int
+}
+
+class Categoria{
+    idCategoria: int
+    nombreCategoria: string
+}
+
+class Departamento{
+    idDepartamente: int
+    nombreDepartamento: string
+}
+
+class Proveedor{
+    idProveedor: int
+    nombreProveedor: string
+}
+
+class OrdenDeCompra{
+    idProducto: int
+    estadoOrden: string
+}
+
+class LineaProducto{
+    idLinea: int
+    fechaCreacion: data
+    estado: string
+    cantidad
+    calcularSubtotal(): int
+}
+
+Producto "*" --o "1" Categoria
+OrdenDeCompra "1" *--> "*" LineaProducto 
+LineaProducto "*" *--> "1" Producto
+
+
+Departamento "1" o-- "*" OrdenDeCompra 
+
+' Una orden de compra se emite para un solo Proveedor
+' Un proveedor puede recibir varias ordenes de compra
+
+Proveedor "1" o--> "*" OrdenDeCompra
+
+@enduml
+
+
+
+
+
+
+
