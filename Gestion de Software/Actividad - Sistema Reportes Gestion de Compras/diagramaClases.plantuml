@@ -1,55 +1,88 @@
 @startuml Gestion Ordenes de Compra
 left to right direction
+skinparam classAttributeIconSize 0
 
-class Producto{
+' Definición de colores para estereotipo <<Reporte>>
+skinparam classBackgroundColor<<Reporte>> #FDEBD0
+skinparam classBorderColor<<Reporte>> #D35400
+
+' ==== Clases Principales del Dominio ====
+class Producto {
     idProducto: int
 }
 
-class Categoria{
+class Categoria {
     idCategoria: int
     nombreCategoria: string
 }
 
-class Departamento{
+class Departamento {
     idDepartamente: int
     nombreDepartamento: string
 }
 
-class Proveedor{
+class Proveedor {
     idProveedor: int
     nombreProveedor: string
 }
 
-class OrdenDeCompra{
+class OrdenDeCompra {
     idProducto: int
     estadoOrden: string
 }
 
-class LineaProducto{
+class LineaProducto {
     idLinea: int
-    fechaCreacion: data
+    fechaCreacion: date
     estado: string
     cantidad
     calcularSubtotal(): int
 }
 
+' ==== Relaciones entre Clases Principales ====
 Producto "*" --o "1" Categoria
-OrdenDeCompra "1" *--> "*" LineaProducto 
+OrdenDeCompra "1" *--> "*" LineaProducto
 LineaProducto "*" *--> "1" Producto
-
-
-Departamento "1" o-- "*" OrdenDeCompra 
-
-' Una orden de compra se emite para un solo Proveedor
-' Un proveedor puede recibir varias ordenes de compra
-
+Departamento "1" o-- "*" OrdenDeCompra
 Proveedor "1" o--> "*" OrdenDeCompra
 
+' ==== Clases de Reportes con estereotipo <<Reporte>> ====
+abstract class Reporte <<Reporte>> {
+    idReporte: int
+    fechaReporte: date
+    abstract generarReporte(): void
+}
+
+class ReportePorProveedor <<Reporte>> {
+    idProveedor: int
+    generarReporte(): void
+}
+
+class ReportePorCategoriaProducto <<Reporte>> {
+    categoria: string
+    generarReporte(): void
+}
+
+class ReporteGastosPorDepartamento <<Reporte>> {
+    fechaInicio: date
+    fechaFin: date
+    generarReporte(): void
+}
+
+class ReporteOrdenesPendientes <<Reporte>> {
+    generarReporte(): void
+}
+
+' ==== Herencia de Reportes ====
+Reporte <|-- ReportePorProveedor
+Reporte <|-- ReportePorCategoriaProducto
+Reporte <|-- ReporteGastosPorDepartamento
+Reporte <|-- ReporteOrdenesPendientes
+
+' ==== Relaciones de Reportes con el Dominio ====
+Proveedor "1" o-- "1" ReportePorProveedor
+Categoria "1" o-- "1" ReportePorCategoriaProducto
+ReporteGastosPorDepartamento ..> Departamento : usa
+ReporteOrdenesPendientes ..> OrdenDeCompra : consulta
+
 @enduml
-
-
-
-
-
-
-
