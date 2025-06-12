@@ -1,0 +1,20 @@
+@startuml
+hide footbox
+actor Usuario as user
+participant "Interfaz\nUsuario" as ui
+participant "Controlador\nReportes" as controller
+participant "Sistema\nCompras" as sistema
+participant "Base de\nDatos" as db
+
+user -> ui : "Solicita Reporte de Gastos por Departamento"
+ui -> controller : "Selecciona rango de fechas y departamento"
+
+controller -> sistema : "Solicitar compras(departamento, fechas)"
+sistema -> db : "Consultar órdenes de compra"
+db --> sistema : "Lista de órdenes"
+sistema --> controller : "Datos reporte"
+
+controller -> controller : "Formatear reporte"
+controller -> ui : "Mostrar resultados"
+ui -> user : "Visualizar reporte (PDF/Excel)"
+@enduml
