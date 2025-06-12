@@ -1,0 +1,17 @@
+@startuml
+[*] --> Creada
+Creada --> Aprobada : aprobar()
+Creada --> Cancelada : cancelar()
+
+Aprobada --> EnProceso : enviar()
+Aprobada --> Cancelada : cancelar()
+
+EnProceso --> RecibidaParcial : entrega(parcial)
+RecibidaParcial --> RecibidaCompleta : entrega(final)
+EnProceso --> RecibidaCompleta : entrega(completa)
+
+RecibidaCompleta --> Pagada : pagar()
+
+Pagada --> [*]
+Cancelada --> [*]
+@enduml
