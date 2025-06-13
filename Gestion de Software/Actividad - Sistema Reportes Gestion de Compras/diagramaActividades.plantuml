@@ -1,0 +1,29 @@
+@startuml
+|Usuario|
+start
+:Solicitar reporte por categoría;
+:Ingresar categoría;
+
+|ReporteCompras|
+if (¿Categoría válida?) then (sí)
+  :Preparar generación de reporte;
+  :Buscar órdenes de compra;
+
+  partition "Iterar órdenes" {
+    :Obtener primera orden;
+    while (¿Quedan órdenes por revisar?) is (sí)
+      :Procesar orden de compra;
+    endwhile
+  }
+
+  :Generar reporte;
+
+  |Usuario|
+  :Mostrar reporte al usuario;
+  stop
+else (no)
+  |Usuario|
+  :Mostrar mensaje de error;
+  stop
+endif
+@enduml
