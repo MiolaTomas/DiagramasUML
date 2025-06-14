@@ -1,0 +1,43 @@
+@startuml Sistema de control de versiones (tipo Git)
+
+class Repository{
+
+}
+
+class Branch{
+
+}
+
+class Commit{
+
+}
+
+class User{
+
+}
+
+class FileChange{
+
+}
+
+class CommitFileChange{
+    idCommit
+    idFileChange
+}
+
+class UserRepository{
+
+}
+
+Repository "1" *--> "*" Branch
+Branch "1" --> "*" Commit
+' Una branch puede existir sin commits? en caso de que no seria composicion
+Commit "1" <-- "0..*" CommitFileChange
+FileChange "1" <-- "0..*" CommitFileChange
+
+
+User "1" <-- "*" UserRepository
+Repository "1" <-- "*" UserRepository
+
+
+@enduml

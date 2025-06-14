@@ -1,0 +1,40 @@
+@startuml Ejercicio Investigacion Cientifica
+
+class Investigador{
+
+}
+
+class Informe{
+    
+}
+
+class InvestigadorInforme{
+
+}
+
+class Dataset{
+    
+}
+
+class Muestra{
+    
+}
+
+class Sensor{
+    
+}
+
+class SensorDataset{
+
+}
+
+Investigador "1" <-- "*" InvestigadorInforme
+Informe "1" <-- "*" InvestigadorInforme
+
+Dataset "1" *--> "1..*" Muestra
+
+Sensor "1" --> "*" SensorDataset
+Dataset "1" --> "*" SensorDataset
+
+Informe "1" --> "*" Dataset
+@enduml
