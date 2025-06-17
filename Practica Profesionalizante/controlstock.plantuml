@@ -1,0 +1,54 @@
+@startuml
+
+class Categoria {
+  +id: int
+  +nombre: string
+}
+
+class ProductoGenerico {
+  +id: int
+  +nombre: string
+  +categoriaId: int
+}
+
+class Marca {
+  +id: int
+  +nombre: string
+}
+
+class Presentacion {
+  +id: int
+  +descripcion: string
+  +cantidad: decimal
+  +unidad: string
+}
+
+class Producto {
+  +id: int
+  +productoGenericoId: int
+  +marcaId: int
+  +presentacionId: int
+}
+
+class Proveedor {
+  +id: int
+  +nombre: string
+  +contacto: string
+}
+
+class ProveedorProducto {
+  +id: int
+  +proveedorId: int
+  +productoId: int
+  +precio_unitario: decimal
+}
+
+ProductoGenerico "1" --> "1" Categoria
+Producto "1" --> "1" ProductoGenerico
+Producto "1" --> "1" Marca
+Producto "1" --> "1" Presentacion
+
+ProveedorProducto "*" --> "1" Proveedor
+ProveedorProducto "*" --> "1" Producto
+
+@enduml

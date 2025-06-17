@@ -1,0 +1,78 @@
+@startuml
+object catInfusiones {
+  nombre = "Infusiones"
+}
+
+object yerbaGen {
+  nombre = "Yerba Mate"
+}
+
+object marcaTaragui {
+  nombre = "Taragüi"
+}
+
+object presBolsa1kg {
+  descripcion = "Bolsa"
+  cantidad = 1.0
+  unidad = "kg"
+}
+
+object yerbaTaragui1kg {
+  id = 1
+}
+
+object proveedorA {
+  nombre = "Distribuidora Norte"
+}
+
+object lineaProveedorA {
+  precio_unitario = 1800
+}
+
+yerbaGen --> catInfusiones
+yerbaTaragui1kg --> yerbaGen
+yerbaTaragui1kg --> marcaTaragui
+yerbaTaragui1kg --> presBolsa1kg
+lineaProveedorA --> proveedorA
+lineaProveedorA --> yerbaTaragui1kg
+@enduml
+
+
+@startuml
+object catInfusiones {
+  nombre = "Infusiones"
+}
+
+object cafeGen {
+  nombre = "Café"
+}
+
+object marcaVirginia {
+  nombre = "La Virginia"
+}
+
+object presFrasco500g {
+  descripcion = "Frasco"
+  cantidad = 500
+  unidad = "g"
+}
+
+object cafeVirginia500g {
+  id = 2
+}
+
+object proveedorB {
+  nombre = "Mayorista Sur"
+}
+
+object lineaProveedorB {
+  precio_unitario = 2500
+}
+
+cafeGen --> catInfusiones
+cafeVirginia500g --> cafeGen
+cafeVirginia500g --> marcaVirginia
+cafeVirginia500g --> presFrasco500g
+lineaProveedorB --> proveedorB
+lineaProveedorB --> cafeVirginia500g
+@enduml
