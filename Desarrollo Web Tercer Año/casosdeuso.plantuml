@@ -36,6 +36,8 @@ rectangle "Portal de Empleo" {
   (Recibir notificación por cambio de estado) as NotificarCambioEstado
   (Filtrar ofertas laborales) as FiltrarOfertas
   (Filtrar postulaciones laborales) as FiltrarPostulaciones
+  (Suscribirse al newsletter) as SuscribirseNewsletter
+
 
   GestionarOfertas --> BuscarOfertas : <<extend>>
   GestionarOfertas --> VerDetalle : <<extend>>
@@ -55,6 +57,7 @@ Desarrollador --> LoginDev
 Desarrollador --> GestionarPerfil
 Desarrollador --> GestionarOfertas
 Desarrollador --> GestionarPostulaciones
+Desarrollador --> SuscribirseNewsletter
 @enduml
 
 
@@ -79,6 +82,7 @@ rectangle "Portal de Empleo" {
   (Enviar notificación por cambio de estado) as NotificarCambioEstado
   (Filtrar postulaciones laborales) as FiltrarPostulaciones
   (Filtrar ofertas laborales publicadas) as FiltrarOfertas
+  
 }
 
 GestionarOfertas --> PublicarOferta
