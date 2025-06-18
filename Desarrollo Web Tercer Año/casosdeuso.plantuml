@@ -1,0 +1,101 @@
+@startuml Visitante
+left to right direction
+skinparam packageStyle rectangle
+
+actor Visitante
+
+rectangle "Portal de Empleo" {
+  (Buscar ofertas laborales) as BuscarOfertas
+  (Ver detalle de ofertas) as VerDetalle
+  (Suscribirse al newsletter) as SuscribirseNewsletter
+}
+
+Visitante --> BuscarOfertas
+Visitante --> VerDetalle
+Visitante --> SuscribirseNewsletter
+@enduml
+
+@startuml Desarrollador_ConGestionarOfertas
+left to right direction
+skinparam packageStyle rectangle
+
+actor Desarrollador
+
+rectangle "Portal de Empleo" {
+  (Registrarse) as RegDev
+  (Iniciar sesión) as LoginDev
+  (Gestionar perfil profesional) as GestionarPerfil
+  (Gestionar ofertas) as GestionarOfertas
+  (Buscar ofertas laborales) as BuscarOfertas
+  (Ver detalle de ofertas) as VerDetalle
+  (Postularse a ofertas) as Postularse
+  (Guardar ofertas como favoritas) as GuardarFavoritas
+  (Gestionar postulaciones) as GestionarPostulaciones
+  (Visualizar historial de postulaciones) as VerHistorial
+  (Visualizar estado de la postulación) as VerEstado
+  (Recibir notificación por cambio de estado) as NotificarCambioEstado
+  (Filtrar ofertas laborales) as FiltrarOfertas
+  (Filtrar postulaciones laborales) as FiltrarPostulaciones
+
+  GestionarOfertas --> BuscarOfertas : <<extend>>
+  GestionarOfertas --> VerDetalle : <<extend>>
+  GestionarOfertas --> Postularse : <<extend>>
+  GestionarOfertas --> GuardarFavoritas : <<extend>>
+  GestionarOfertas --> FiltrarOfertas : <<extend>>
+
+  GestionarPostulaciones --> VerHistorial : <<extend>>
+  GestionarPostulaciones --> VerEstado : <<extend>>
+  GestionarPostulaciones --> FiltrarPostulaciones : <<extend>>
+
+  VerEstado --> NotificarCambioEstado : <<include>>
+}
+
+Desarrollador --> RegDev
+Desarrollador --> LoginDev
+Desarrollador --> GestionarPerfil
+Desarrollador --> GestionarOfertas
+Desarrollador --> GestionarPostulaciones
+@enduml
+
+
+
+@startuml Empresa
+left to right direction
+skinparam packageStyle rectangle
+
+actor Empresa
+
+rectangle "Portal de Empleo" {
+  (Registrarse) as RegEmp
+  (Iniciar sesión) as LoginEmp
+  (Publicar ofertas laborales) as PublicarOferta
+  (Editar o eliminar ofertas) as EditarOferta
+  (Ver postulaciones recibidas) as VerPostulaciones
+  (Ver perfiles de candidatos) as VerPerfiles
+  (Gestionar postulaciones) as GestionarPostulantes
+  (Gestionar Ofertas Laborales) as GestionarOfertas
+
+  (Modificar estado de postulacion) as ModificarEstado
+  (Enviar notificación por cambio de estado) as NotificarCambioEstado
+  (Filtrar postulaciones laborales) as FiltrarPostulaciones
+  (Filtrar ofertas laborales publicadas) as FiltrarOfertas
+}
+
+GestionarOfertas --> PublicarOferta
+GestionarOfertas --> EditarOferta
+GestionarOfertas --> FiltrarOfertas
+
+Empresa --> GestionarPostulantes
+GestionarPostulantes --> VerPostulaciones
+GestionarPostulantes --> ModificarEstado
+GestionarPostulantes --> FiltrarPostulaciones
+
+ModificarEstado --> NotificarCambioEstado :<<include>>
+Empresa --> GestionarOfertas
+
+Empresa --> RegEmp
+Empresa --> LoginEmp
+Empresa --> VerPerfiles
+
+@enduml
+
