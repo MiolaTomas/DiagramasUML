@@ -13,14 +13,12 @@ class ProductoGenerico {
 
 class Marca {
   +id: int
-  +nombre: string
+  +descripcion: string
 }
 
 class Presentacion {
   +id: int
   +descripcion: string
-  +cantidad: decimal
-  +unidad: string
 }
 
 class Producto {
@@ -28,19 +26,55 @@ class Producto {
   +productoGenericoId: int
   +marcaId: int
   +presentacionId: int
+  +puntoCriticoDeReposicion: int
+  +rotacion: string
+  +existencias: int
+  +codigoDeBarra
+
+  +calcularExistencias(): 
+  +codigoDeBarras():
 }
 
 class Proveedor {
   +id: int
-  +nombre: string
-  +contacto: string
+  +nombreContacto: string
+  +razonSocial: string
+  +telefono: string
+  +correo: string
+  +cuit: string
+  +idLocalidad: int
+  +idCondicionIva: int
+}
+
+class CondicionIva {
+  +idCondicionIva: int
+  +descripcion: string
+}
+
+class Localidad {
+  +idLocalidad: int
+  +idProvincia: int
+  +descripcion: string
+  +codigoPostal: string
+  +caracteristica: string
+}
+
+class CondicionVentaProveedores {
+  +idProveedor: int
+  +idCondicionPago: int
+  +descripcion: string
+}
+
+class CondicionDePago {
+  +idCondicionPago: int
+  +descripcion: string
 }
 
 class ProveedorProducto {
   +id: int
   +proveedorId: int
   +productoId: int
-  +precio_unitario: decimal
+  +precio_unitario: int
 }
 
 ProductoGenerico "1" --> "1" Categoria
@@ -51,4 +85,9 @@ Producto "1" --> "1" Presentacion
 ProveedorProducto "*" --> "1" Proveedor
 ProveedorProducto "*" --> "1" Producto
 
+Proveedor "1" --> "1" CondicionIva
+Proveedor "1" --> "1" Localidad
+
+CondicionVentaProveedores "*" --> "1" Proveedor
+CondicionVentaProveedores "*" --> "1" CondicionDePago
 @enduml
